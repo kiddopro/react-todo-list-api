@@ -2,40 +2,37 @@ import React, { useState } from "react";
 
 //create your first component
 const Home = () => {
+	// const url = "https://assets.breatheco.de/apis/fake/todos/user";
+	// const PUT = {
+	// 	method: "PUT",
+	// 	body: JSON.stringify(todos),
+	// 	headers: {
+	// 		"Content-type": "application/json"
+	// 	}
+	// };
+	// const GET = {
+	// 	method: "GET",
+	// 	body: JSON.stringify(todos),
+	// 	headers: {
+	// 		"Content-type": "application/json"
+	// 	}
+	// };
 
+	// const POST = {
+	// 	method: "POST",
+	// 	body: JSON.stringify(todos),
+	// 	headers: {
+	// 		"Content-type": "application/json"
+	// 	}
+	// };
 
-	const url = "https://assets.breatheco.de/apis/fake/todos/user";
-	const PUT = {
-		method: 'PUT',
-		body: JSON.stringify(todos),
-		headers: {
-			"Content-type": "application/json"
-		}
-	}
-	const GET = {
-		method: 'GET',
-		body: JSON.stringify(todos),
-		headers: {
-			"Content-type": "application/json"
-		}
-	}
-
-	const POST = {
-		method: 'POST',
-		body: JSON.stringify(todos),
-		headers: {
-			"Content-type": "application/json"
-		}
-	}
-
-	const DELETE = {
-		method: 'DELETE',
-		body: JSON.stringify(todos),
-		headers: {
-			"Content-type": "application/json"
-		}
-	}
-
+	// const DELETE = {
+	// 	method: "DELETE",
+	// 	body: JSON.stringify(todos),
+	// 	headers: {
+	// 		"Content-type": "application/json"
+	// 	}
+	// };
 
 	const [task, setTask] = useState("");
 	const [tasksList, setTasksList] = useState([]);
@@ -44,10 +41,9 @@ const Home = () => {
 		setTasksList([...tasksList, task]);
 	}
 
-
-	const getTodoList = async () => {
-		return await (await fetch(url)).json;
-	}
+	// const getTodoList = async () => {
+	// 	return await (await fetch(url)).json;
+	// };
 
 	function deleteTask(indice) {
 		let result = [];
@@ -79,7 +75,9 @@ const Home = () => {
 						return (
 							<li key={index}>
 								{item}
-								<span onClick={()=>deleteTask(index)}>❌</span>
+								<span onClick={() => deleteTask(index)}>
+									❌
+								</span>
 							</li>
 						);
 					})}
