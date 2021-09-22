@@ -49,7 +49,7 @@ const Home = () => {
 		return await (await fetch(url)).json;
 	}
 
-	function deleteTask(index) {
+	function deleteTask(indice) {
 		let result = [];
 		result = tasksList.filter((tarea, index) => index !== indice);
 		setTasksList(result);
