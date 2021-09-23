@@ -31,9 +31,9 @@ li{
 }
 
 span{
-
     float: right;
     visibility: $variable;
+    cursor: pointer;
 }
 
 
@@ -43,4 +43,8 @@ span{
 
 ul {
     padding-inline-start: 0;
+}
+
+input{
+    box-shadow: none !important;
 }
