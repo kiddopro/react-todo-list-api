@@ -38,7 +38,9 @@ const Home = () => {
 	const [tasksList, setTasksList] = useState([]);
 
 	function addTask() {
-		setTasksList([...tasksList, task]);
+		if (task != "") {
+			setTasksList([...tasksList, task]);
+		}
 	}
 
 	// const getTodoList = async () => {
@@ -59,12 +61,12 @@ const Home = () => {
 	}
 
 	return (
-		<div className="text-left mt-5 mx-auto w-50">
+		<div className="text-left mt-5 mx-auto w-50 bg-secondary p-1">
 			<div className="taskContainer">
 				<h1 className="text-center">todos</h1>
 				<input
 					type="text"
-					className="form-control"
+					className="form-control border-0"
 					value={task}
 					onChange={e => setTask(e.target.value)}
 					onKeyPress={a => keyHandler(a.key)}
@@ -73,7 +75,7 @@ const Home = () => {
 				<ul>
 					{tasksList.map((item, index) => {
 						return (
-							<li key={index}>
+							<li key={index} className="form-control">
 								{item}
 								<span onClick={() => deleteTask(index)}>
 									❌
