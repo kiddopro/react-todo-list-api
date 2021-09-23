@@ -42,7 +42,7 @@ const Home = () => {
 							<li key={index} className="form-control items">
 								{item}
 								<span onClick={() => deleteTask(index)}>
-									❌
+									✖️
 								</span>
 							</li>
 						);
