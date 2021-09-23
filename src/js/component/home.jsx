@@ -2,38 +2,6 @@ import React, { useState } from "react";
 
 //create your first component
 const Home = () => {
-	// const url = "https://assets.breatheco.de/apis/fake/todos/user";
-	// const PUT = {
-	// 	method: "PUT",
-	// 	body: JSON.stringify(todos),
-	// 	headers: {
-	// 		"Content-type": "application/json"
-	// 	}
-	// };
-	// const GET = {
-	// 	method: "GET",
-	// 	body: JSON.stringify(todos),
-	// 	headers: {
-	// 		"Content-type": "application/json"
-	// 	}
-	// };
-
-	// const POST = {
-	// 	method: "POST",
-	// 	body: JSON.stringify(todos),
-	// 	headers: {
-	// 		"Content-type": "application/json"
-	// 	}
-	// };
-
-	// const DELETE = {
-	// 	method: "DELETE",
-	// 	body: JSON.stringify(todos),
-	// 	headers: {
-	// 		"Content-type": "application/json"
-	// 	}
-	// };
-
 	const [task, setTask] = useState("");
 	const [tasksList, setTasksList] = useState([]);
 
@@ -42,10 +10,6 @@ const Home = () => {
 			setTasksList([...tasksList, task]);
 		}
 	}
-
-	// const getTodoList = async () => {
-	// 	return await (await fetch(url)).json;
-	// };
 
 	function deleteTask(indice) {
 		let result = [];
@@ -61,7 +25,7 @@ const Home = () => {
 	}
 
 	return (
-		<div className="text-left mt-5 mx-auto w-50 bg-secondary p-1">
+		<div className="text-left mt-5 mx-auto w-50 bg-light p-1">
 			<div className="taskContainer">
 				<h1 className="text-center">todos</h1>
 				<input
@@ -75,7 +39,7 @@ const Home = () => {
 				<ul>
 					{tasksList.map((item, index) => {
 						return (
-							<li key={index} className="form-control">
+							<li key={index} className="form-control items">
 								{item}
 								<span onClick={() => deleteTask(index)}>
 									❌
@@ -84,6 +48,9 @@ const Home = () => {
 						);
 					})}
 				</ul>
+			</div>
+			<div>
+				<small>{tasksList.length} remaining </small>
 			</div>
 		</div>
 	);

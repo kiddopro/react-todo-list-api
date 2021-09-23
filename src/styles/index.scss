@@ -1,6 +1,6 @@
 @import "~bootstrap/scss/bootstrap.scss";
 
-$visibilitys: "visible";
+$variable: "visible";
 
 *{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -22,20 +22,22 @@ h1{
     font-size: 70px;
 }
 
-ul li{
+li{
     list-style: none;
     width: 100%;
-    background-color: grey;
+    border: none !important;
     margin: 1px 0 0 0;
+    
 }
 span{
+
     float: right;
-    visibility: $visibilitys;
+    visibility: $variable;
 }
 
 
-ul li:hover{
-    $visibilitys: "hidden";
+.items:hover{
+    $variable: "hidden";
 }
 
 ul {
