@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 const url = "https://assets.breatheco.de/apis/fake/todos/user/kiddopro";
 //create your first component
 const Home = () => {
+	// state
 	const [task, setTask] = useState("");
 	const [tasksList, setTasksList] = useState([]);
 
@@ -12,7 +13,7 @@ const Home = () => {
 				done: false
 			};
 			setTasksList([...tasksList, taskFormat]);
-			postTask();
+			postTaskAPI();
 		}
 	}
 
@@ -20,6 +21,7 @@ const Home = () => {
 		let result = [];
 		result = tasksList.filter((tarea, index) => index !== indice);
 		setTasksList(result);
+		deleteTaskAPI();
 	}
 
 	function keyHandler(key) {
@@ -31,20 +33,31 @@ const Home = () => {
 
 	// fetch
 
-	function postTask() {
-		fetch(url, {
+	async function postTaskAPI() {
+		const resp = await fetch(url, {
 			method: "PUT",
 			headers: {
 				"Content-type": "application/json"
 			},
 			body: JSON.stringify(tasksList)
-		})
-			.then(res => res.json())
-			.then(data => {})
-			.catch(err => console.log(err));
+		});
+
+		console.log(resp.status);
 	}
 
-	function getAllTasks() {
+	async function deleteTaskAPI() {
+		const resp = await fetch(url, {
+			method: "PUT",
+			headers: {
+				"Content-type": "application/json"
+			},
+			body: JSON.stringify(tasksList)
+		});
+
+		console.log(resp.status);
+	}
+
+	function getAllTasksAPI() {
 		fetch(url)
 			.then(res => res.json())
 			.then(response => {
@@ -53,8 +66,19 @@ const Home = () => {
 			.catch(err => console.log(err));
 	}
 
+	function restart() {
+		fetch(url, {
+			method: "POST",
+			headers: {
+				"Content-type": "application/json"
+			},
+			body: JSON.stringify([])
+		});
+	}
+
 	useEffect(() => {
-		getAllTasks();
+		restart();
+		getAllTasksAPI();
 	}, []);
 
 	return (
