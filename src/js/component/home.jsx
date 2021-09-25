@@ -39,7 +39,6 @@ const Home = () => {
 			body: JSON.stringify(tasksList)
 		});
 
-		console.log(resp.status);
 		if (resp.status == 200) {
 			setTask({ label: "" });
 		}
@@ -53,8 +52,6 @@ const Home = () => {
 			},
 			body: JSON.stringify(tasksList)
 		});
-
-		console.log(resp.status);
 	}
 
 	function getAllTasksAPI() {
@@ -63,7 +60,7 @@ const Home = () => {
 			.then(response => {
 				setTasksList(response);
 			})
-			.catch(err => console.log(err));
+			.catch(err => err);
 	}
 
 	useEffect(() => {
