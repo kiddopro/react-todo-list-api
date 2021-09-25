@@ -3,16 +3,13 @@ const url = "https://assets.breatheco.de/apis/fake/todos/user/kiddopro";
 //create your first component
 const Home = () => {
 	// state
-	const [task, setTask] = useState("");
+	// const [task, setTask] = useState("");
+	const [task, setTask] = useState({ label: "", done: null });
 	const [tasksList, setTasksList] = useState([]);
 
 	function addTask() {
-		if (task != "") {
-			let taskFormat = {
-				label: task,
-				done: false
-			};
-			setTasksList([...tasksList, taskFormat]);
+		if (task.label != "") {
+			setTasksList([...tasksList, task]);
 			postTaskAPI();
 		}
 	}
@@ -27,7 +24,7 @@ const Home = () => {
 	function keyHandler(key) {
 		if (key == "Enter") {
 			addTask();
-			setTask("");
+			// setTask("");
 		}
 	}
 
@@ -43,6 +40,9 @@ const Home = () => {
 		});
 
 		console.log(resp.status);
+		if (resp.status == 200) {
+			setTask({ label: "" });
+		}
 	}
 
 	async function deleteTaskAPI() {
@@ -66,18 +66,7 @@ const Home = () => {
 			.catch(err => console.log(err));
 	}
 
-	function restart() {
-		fetch(url, {
-			method: "POST",
-			headers: {
-				"Content-type": "application/json"
-			},
-			body: JSON.stringify([])
-		});
-	}
-
 	useEffect(() => {
-		restart();
 		getAllTasksAPI();
 	}, []);
 
@@ -90,7 +79,9 @@ const Home = () => {
 						type="text"
 						className="form-control border-0"
 						value={task.label}
-						onChange={e => setTask(e.target.value)}
+						onChange={e =>
+							setTask({ label: e.target.value, done: false })
+						}
 						onKeyPress={a => keyHandler(a.key)}
 						placeholder="What do you need to be done?"
 					/>
