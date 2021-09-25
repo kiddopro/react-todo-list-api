@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+const url = "https://assets.breatheco.de/apis/fake/todos/user/kiddopro";
 //create your first component
 const Home = () => {
 	const [task, setTask] = useState("");
@@ -7,7 +7,12 @@ const Home = () => {
 
 	function addTask() {
 		if (task != "") {
-			setTasksList([...tasksList, task]);
+			let taskFormat = {
+				label: task,
+				done: false
+			};
+			setTasksList([...tasksList, taskFormat]);
+			postTask();
 		}
 	}
 
@@ -24,12 +29,26 @@ const Home = () => {
 		}
 	}
 
+	// fetch
+
+	function postTask() {
+		fetch(url, {
+			method: "PUT",
+			headers: {
+				"Content-type": "application/json"
+			},
+			body: JSON.stringify(tasksList)
+		})
+			.then(res => res.json())
+			.then(data => {})
+			.catch(err => console.log(err));
+	}
+
 	function getAllTasks() {
-		fetch("https://assets.breatheco.de/apis/fake/todos/user/kiddopro")
+		fetch(url)
 			.then(res => res.json())
 			.then(response => {
-				setTasksList([...tasksList, response[0].label]);
-				// console.log(response);
+				setTasksList(response);
 			})
 			.catch(err => console.log(err));
 	}
@@ -46,7 +65,7 @@ const Home = () => {
 					<input
 						type="text"
 						className="form-control border-0"
-						value={task}
+						value={task.label}
 						onChange={e => setTask(e.target.value)}
 						onKeyPress={a => keyHandler(a.key)}
 						placeholder="What do you need to be done?"
@@ -55,7 +74,7 @@ const Home = () => {
 						{tasksList.map((item, index) => {
 							return (
 								<li key={index} className="form-control items">
-									{item}
+									{item.label}
 									<span onClick={() => deleteTask(index)}>
 										✖️
 									</span>
