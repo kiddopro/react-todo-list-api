@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 //create your first component
 const Home = () => {
@@ -23,6 +23,20 @@ const Home = () => {
 			setTask("");
 		}
 	}
+
+	function getAllTasks() {
+		fetch("https://assets.breatheco.de/apis/fake/todos/user/kiddopro")
+			.then(res => res.json())
+			.then(response => {
+				setTasksList([...tasksList, response[0].label]);
+				// console.log(response);
+			})
+			.catch(err => console.log(err));
+	}
+
+	useEffect(() => {
+		getAllTasks();
+	}, []);
 
 	return (
 		<>
