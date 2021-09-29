@@ -9,8 +9,9 @@ const Home = () => {
 
 	function addTask() {
 		if (task.label != "") {
-			setTasksList([...tasksList, task]);
-			postTaskAPI();
+			let taskOut = [...tasksList, task];
+			setTasksList(taskOut);
+			postTaskAPI(taskOut);
 		}
 	}
 
@@ -30,13 +31,13 @@ const Home = () => {
 
 	// fetch
 
-	async function postTaskAPI() {
+	async function postTaskAPI(array) {
 		const resp = await fetch(url, {
 			method: "PUT",
 			headers: {
 				"Content-type": "application/json"
 			},
-			body: JSON.stringify(tasksList)
+			body: JSON.stringify(array)
 		});
 
 		if (resp.status == 200) {
