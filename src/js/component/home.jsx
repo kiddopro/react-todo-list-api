@@ -19,7 +19,7 @@ const Home = () => {
 		let result = [];
 		result = tasksList.filter((tarea, index) => index !== indice);
 		setTasksList(result);
-		deleteTaskAPI();
+		deleteTaskAPI(result);
 	}
 
 	function keyHandler(key) {
@@ -45,13 +45,13 @@ const Home = () => {
 		}
 	}
 
-	async function deleteTaskAPI() {
+	async function deleteTaskAPI(array) {
 		const resp = await fetch(url, {
 			method: "PUT",
 			headers: {
 				"Content-type": "application/json"
 			},
-			body: JSON.stringify(tasksList)
+			body: JSON.stringify(array)
 		});
 	}
 
